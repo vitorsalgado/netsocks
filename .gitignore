@@ -35,7 +35,7 @@ target/
 # Gradle
 .gradle
 /build/
-!gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.jar
 
 # Node.js
 node_modules/

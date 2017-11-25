@@ -1,6 +1,7 @@
 package com.netsocks.associatefan.resources;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import com.mongodb.MongoClient;
 import com.netsocks.associatefan.domain.customer.Customer;
 import com.netsocks.associatefan.domain.customer.CustomerRepository;
 import org.json.JSONObject;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;

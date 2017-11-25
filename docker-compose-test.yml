@@ -4,14 +4,14 @@ services:
   campaign_test:
     build:
       context: ./campaign
+      dockerfile: Dockerfile.test
     container_name: com.netsocks.test.campaign.api
-    command: ./gradlew check
 
   fan_test:
     build:
       context: ./associate_fan
+      dockerfile: Dockerfile.test
     container_name: com.netsocks.test.associatefan.api
-    command: ./gradlew check
 
   stream_test:
     build:

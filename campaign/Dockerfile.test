@@ -1,0 +1,9 @@
+FROM openjdk:8-jdk
+
+WORKDIR /campaign
+
+COPY . .
+
+RUN ./gradlew build
+
+CMD ./gradlew check

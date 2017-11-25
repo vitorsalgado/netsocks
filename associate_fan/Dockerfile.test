@@ -1,0 +1,9 @@
+FROM openjdk:8-jdk
+
+WORKDIR /fan
+
+COPY . .
+
+RUN ./gradlew build
+
+CMD ./gradlew check

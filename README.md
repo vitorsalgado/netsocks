@@ -47,6 +47,9 @@ To start all APIs with Mongodb and Redis instances, simple type on a console:
 ```
 make
 ```
+
+To clear all, run: `make down`
+
 Refer to **Projects** section below for more details about each project.
 
 
@@ -102,9 +105,15 @@ make stream-docker input=YOUR_INPUT_HERE
 ### Load Tests
 The load tests uses [Gatling](https://gatling.io/) and are written in Scala.  
 They attempt to simulate more than 100 users using the APIs.  
-To run the tests:
+To run the tests, first you need to start all APIs:
 ```
+# start apis first!
+make
+
+# to run campaign load tests
 make load-tests-campaign
+
+# to run support fan load tests
 make load-tests-fan
 ```
 
