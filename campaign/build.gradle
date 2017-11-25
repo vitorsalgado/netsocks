@@ -1,0 +1,78 @@
+group 'com.netsocks'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+//apply from: '../tools/linters.gradle'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb"
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
+    compile "org.springframework.cloud:spring-cloud-starter-hystrix"
+
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2"
+
+    compile "io.springfox:springfox-swagger2:2.7.0"
+    compile "io.springfox:springfox-swagger-ui:2.7.0"
+
+    compile "org.apache.logging.log4j:log4j-api:2.9.1"
+    compile "org.apache.logging.log4j:log4j-core:2.9.1"
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-core:2.12.0"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR5"
+    }
+}
+
+bootRun {
+    addResources = true
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+test {
+    testLogging {
+        events 'skipped', 'failed'
+        showStackTraces true
+        exceptionFormat 'full'
+    }
+}

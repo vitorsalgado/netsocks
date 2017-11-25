@@ -1,0 +1,26 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.scala-lang:scala-library:2.10.5'
+    testCompile 'io.rest-assured:rest-assured:3.0.6'
+    testCompile 'io.rest-assured:scala-support:3.0.6'
+    testCompile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+test {
+    testLogging {
+        events 'skipped', 'failed'
+        showStackTraces true
+        exceptionFormat 'full'
+    }
+}

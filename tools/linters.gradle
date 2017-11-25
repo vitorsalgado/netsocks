@@ -1,0 +1,41 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+def reportsDir = "$buildDir/reports"
+
+checkstyle {
+    group "Linters"
+    toolVersion "8.4"
+    configFile file("../tools/linters/checkstyle.xml")
+
+    project.ext.checkstyleVersion = '8.4'
+
+    ignoreFailures = false
+
+    checkstyleMain {
+        source = sourceSets.main.allSource
+    }
+}
+
+findbugs {
+    group "Linters"
+    toolVersion "3.0.1"
+    ignoreFailures = false
+    sourceSets = [sourceSets.main]
+    effort = "max"
+    reportLevel = "high"
+    reportsDir = file("$project.buildDir/reports/findbugs")
+}
+
+pmd {
+    group "Linters"
+    toolVersion = "5.8.1"
+    ignoreFailures = false
+    sourceSets = [sourceSets.main]
+    ruleSetFiles = files("../tools/linters/pmd-ruleset.xml")
+    ruleSets = []
+    reportsDir = file("$project.buildDir/reports/pmd")
+}
+
+task lint(dependsOn: ['checkstyleMain', 'findbugsMain', 'pmdMain'])

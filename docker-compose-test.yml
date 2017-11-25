@@ -1,0 +1,20 @@
+version: '2'
+services:
+
+  campaign_test:
+    build:
+      context: ./campaign
+    container_name: com.netsocks.test.campaign.api
+    command: ./gradlew check
+
+  fan_test:
+    build:
+      context: ./associate_fan
+    container_name: com.netsocks.test.associatefan.api
+    command: ./gradlew check
+
+  stream_test:
+    build:
+      context: ./stream
+    container_name: com.netsocks.test.stream
+    command: ./gradlew check

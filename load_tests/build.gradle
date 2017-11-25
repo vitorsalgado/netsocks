@@ -1,0 +1,47 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.scala-lang:scala-library:2.10.5'
+    testCompile 'io.gatling:gatling-app:2.3.0'
+    testCompile 'io.gatling.highcharts:gatling-charts-highcharts:2.3.0'
+}
+
+task runCampaignSimulation(type: JavaExec) {
+    description = 'Gatling Tests -> Campaign'
+    classpath = sourceSets.test.runtimeClasspath + configurations.testCompile + configurations.compile
+    main = "io.gatling.app.Gatling"
+    args = ['-s', 'com.netsocks.simulations.CampaignApiSimulation',
+            '-sf', 'test/resources',
+            '-df', 'test/resources',
+            '-rf', "${buildDir}/reports/gatling"
+    ]
+}
+
+task runFanSimulation(type: JavaExec) {
+    description = 'Gatling Tests -> Fan'
+    classpath = sourceSets.test.runtimeClasspath + configurations.testCompile + configurations.compile
+    main = "io.gatling.app.Gatling"
+    args = ['-s', 'com.netsocks.simulations.FanApiSimulation',
+            '-sf', 'test/resources',
+            '-df', 'test/resources',
+            '-rf', "${buildDir}/reports/gatling"
+    ]
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+test {
+    testLogging {
+        events 'skipped', 'failed'
+        showStackTraces true
+        exceptionFormat 'full'
+    }
+}

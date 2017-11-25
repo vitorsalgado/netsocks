@@ -1,0 +1,14 @@
+{
+  "name": "campaign-update-receiver",
+  "version": "1.0.0",
+  "description": "Simple application that subscribes to Redis 'Campaign Updates' channel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Vitor Hugo Salgado <vsalgadopb@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^2.8.0"
+  }
+}
